@@ -1,0 +1,20 @@
+{
+  "extends": "@tsconfig/recommended",
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "bundler",
+    "useDefineForClassFields": true,
+    "strict": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*", "rsbuild.config.ts"]
+}

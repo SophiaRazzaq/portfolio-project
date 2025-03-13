@@ -1,0 +1,62 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "ignore": ["./src/routeTree.gen.ts"],
+    "include": [
+      "src/**/*",
+      "biome.jsonc",
+      "package.json",
+      "rsbuild.config.ts",
+      "tsconfig.json",
+      "./tailwind.config.mjs",
+      "./postcss.config.mjs"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "trailingCommas": "all",
+      "indentWidth": 2,
+      "indentStyle": "space"
+    }
+  },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none",
+      "indentWidth": 2,
+      "indentStyle": "space",
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
+    },
+    "parser": {
+      "allowTrailingCommas": true,
+      "allowComments": true
+    }
+  },
+  "css": {
+    "linter": { "enabled": true },
+    "formatter": { "enabled": true }
+  }
+}
