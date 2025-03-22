@@ -8,6 +8,7 @@ import {
 	Title,
 	Text,
 } from "@mantine/core";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/contact")({
 	component: ContactPage,
@@ -21,9 +22,6 @@ function ContactPage() {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-
-		// TODO: Link with a form service like Formspree or Google Forms
-		console.log("Submitted", { name, email, message });
 		setSubmitted(true);
 		setName("");
 		setEmail("");
@@ -38,8 +36,9 @@ function ContactPage() {
 	}, [submitted]);
 
 	return (
-		<Container size="sm" py="xl" className="space-y-6">
+		<Container size="sm" py="xl" className="space-y-6 relative">
 			<Title order={2}>Contact Me</Title>
+
 			<form onSubmit={handleSubmit} className="space-y-4">
 				<TextInput
 					required
@@ -62,7 +61,26 @@ function ContactPage() {
 				/>
 				<Button type="submit">Send</Button>
 			</form>
-			{submitted && <Text c="green">Message sent successfully!</Text>}
+
+			{/* ✅ Centered Animated Popup */}
+			<AnimatePresence>
+				{submitted && (
+					<motion.div
+						key="popup"
+						initial={{ opacity: 0, scale: 0.9 }}
+						animate={{ opacity: 1, scale: 1 }}
+						exit={{ opacity: 0, scale: 0.9 }}
+						transition={{ duration: 0.4 }}
+						className="fixed inset-0 flex items-center justify-center z-50"
+					>
+						<div className="bg-green-100 dark:bg-green-800 text-green-900 dark:text-green-100 px-6 py-4 rounded-xl shadow-xl text-center">
+							<Text fw={600} size="lg">
+								✅ Message delivered successfully! 🚀🎉
+							</Text>
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</Container>
 	);
 }

@@ -1,4 +1,5 @@
 import { Card, Image, Text, Button, Stack } from "@mantine/core";
+import { motion } from "framer-motion";
 
 type Props = {
 	title: string;
@@ -7,9 +8,20 @@ type Props = {
 	github: string;
 };
 
+const MotionCard = motion(Card);
+
 const ProjectCard = ({ title, description, image, github }: Props) => {
 	return (
-		<Card shadow="sm" padding="lg" radius="md" withBorder>
+		<MotionCard
+			shadow="sm"
+			padding="lg"
+			radius="md"
+			withBorder
+			whileHover={{ scale: 1.03 }}
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.3, ease: "easeOut" }}
+		>
 			<Stack>
 				{image && <Image src={image} alt={title} height={160} radius="md" />}
 				<Text fw={500}>{title}</Text>
@@ -26,7 +38,7 @@ const ProjectCard = ({ title, description, image, github }: Props) => {
 					View on GitHub
 				</Button>
 			</Stack>
-		</Card>
+		</MotionCard>
 	);
 };
 

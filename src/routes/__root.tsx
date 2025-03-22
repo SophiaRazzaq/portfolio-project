@@ -94,11 +94,6 @@ const RootLayout = () => {
 				<Outlet />
 				<Footer />
 			</AppShell.Main>
-
-			{/* Main content */}
-			<AppShell.Main>
-				<Outlet />
-			</AppShell.Main>
 		</AppShell>
 	);
 };
