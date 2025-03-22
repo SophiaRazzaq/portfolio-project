@@ -10,85 +10,142 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as AboutImport } from './routes/about'
-import { Route as IndexImport } from './routes/index'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as ProjectsImport } from "./routes/projects";
+import { Route as EditprofileImport } from "./routes/editprofile";
+import { Route as ContactImport } from "./routes/contact";
+import { Route as AboutImport } from "./routes/about";
+import { Route as IndexImport } from "./routes/index";
 
 // Create/Update Routes
 
+const ProjectsRoute = ProjectsImport.update({
+	id: "/projects",
+	path: "/projects",
+	getParentRoute: () => rootRoute,
+} as any);
+
+const EditprofileRoute = EditprofileImport.update({
+	id: "/editprofile",
+	path: "/editprofile",
+	getParentRoute: () => rootRoute,
+} as any);
+
+const ContactRoute = ContactImport.update({
+	id: "/contact",
+	path: "/contact",
+	getParentRoute: () => rootRoute,
+} as any);
+
 const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any)
+	id: "/about",
+	path: "/about",
+	getParentRoute: () => rootRoute,
+} as any);
 
 const IndexRoute = IndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
+	id: "/",
+	path: "/",
+	getParentRoute: () => rootRoute,
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-  }
+declare module "@tanstack/react-router" {
+	interface FileRoutesByPath {
+		"/": {
+			id: "/";
+			path: "/";
+			fullPath: "/";
+			preLoaderRoute: typeof IndexImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/about": {
+			id: "/about";
+			path: "/about";
+			fullPath: "/about";
+			preLoaderRoute: typeof AboutImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/contact": {
+			id: "/contact";
+			path: "/contact";
+			fullPath: "/contact";
+			preLoaderRoute: typeof ContactImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/editprofile": {
+			id: "/editprofile";
+			path: "/editprofile";
+			fullPath: "/editprofile";
+			preLoaderRoute: typeof EditprofileImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/projects": {
+			id: "/projects";
+			path: "/projects";
+			fullPath: "/projects";
+			preLoaderRoute: typeof ProjectsImport;
+			parentRoute: typeof rootRoute;
+		};
+	}
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+	"/": typeof IndexRoute;
+	"/about": typeof AboutRoute;
+	"/contact": typeof ContactRoute;
+	"/editprofile": typeof EditprofileRoute;
+	"/projects": typeof ProjectsRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+	"/": typeof IndexRoute;
+	"/about": typeof AboutRoute;
+	"/contact": typeof ContactRoute;
+	"/editprofile": typeof EditprofileRoute;
+	"/projects": typeof ProjectsRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+	__root__: typeof rootRoute;
+	"/": typeof IndexRoute;
+	"/about": typeof AboutRoute;
+	"/contact": typeof ContactRoute;
+	"/editprofile": typeof EditprofileRoute;
+	"/projects": typeof ProjectsRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
-  fileRoutesById: FileRoutesById
+	fileRoutesByFullPath: FileRoutesByFullPath;
+	fullPaths: "/" | "/about" | "/contact" | "/editprofile" | "/projects";
+	fileRoutesByTo: FileRoutesByTo;
+	to: "/" | "/about" | "/contact" | "/editprofile" | "/projects";
+	id: "__root__" | "/" | "/about" | "/contact" | "/editprofile" | "/projects";
+	fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+	IndexRoute: typeof IndexRoute;
+	AboutRoute: typeof AboutRoute;
+	ContactRoute: typeof ContactRoute;
+	EditprofileRoute: typeof EditprofileRoute;
+	ProjectsRoute: typeof ProjectsRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-}
+	IndexRoute: IndexRoute,
+	AboutRoute: AboutRoute,
+	ContactRoute: ContactRoute,
+	EditprofileRoute: EditprofileRoute,
+	ProjectsRoute: ProjectsRoute,
+};
 
 export const routeTree = rootRoute
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+	._addFileChildren(rootRouteChildren)
+	._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
@@ -97,7 +154,10 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/about",
+        "/contact",
+        "/editprofile",
+        "/projects"
       ]
     },
     "/": {
@@ -105,6 +165,15 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/contact": {
+      "filePath": "contact.tsx"
+    },
+    "/editprofile": {
+      "filePath": "editprofile.tsx"
+    },
+    "/projects": {
+      "filePath": "projects.tsx"
     }
   }
 }
